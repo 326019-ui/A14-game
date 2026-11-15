@@ -383,8 +383,8 @@
         document.addEventListener('keydown', (e) => {
             if (!isPlaying) return;
             
-            // 無視するキー
-            if (['Shift', 'Control', 'Alt', 'Meta', 'Tab', 'Enter', 'Backspace'].includes(e.key)) return;
+            // 文字ではないキー、IME変換中の入力、ショートカットは採点しない
+            if (e.isComposing || e.ctrlKey || e.metaKey || e.altKey || e.key.length !== 1) return;
 
             const typedKey = e.key.toLowerCase();
             const expectedKey = untypedString.charAt(0).toLowerCase();
